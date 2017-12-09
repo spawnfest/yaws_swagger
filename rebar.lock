@@ -1,0 +1,8 @@
+[{<<"yapp">>,
+  {git,"https://github.com/nayibor/yapp.git",
+       {ref,"37e2b2a37edc8121c1bd315697a3536802e7e7ba"}},
+  0},
+ {<<"yaws">>,
+  {git,"https://github.com/klacke/yaws.git",
+       {ref,"d00ab30964a3ceb17d3e64950236c97e3d8ce0b3"}},
+  0}].

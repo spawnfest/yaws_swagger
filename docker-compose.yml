@@ -1,0 +1,11 @@
+version: "3"
+services:
+  web:
+    image: ghudmusic/ghudmusic_erlang_yaws:0.1.0
+    ports:
+      - "8008:8008"
+    volumes:
+      - "../cnc/:/opt/erlang/yaws_swagger"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+    stdin_open: true
+    tty: true

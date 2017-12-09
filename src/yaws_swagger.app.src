@@ -1,0 +1,17 @@
+{application, yaws_swagger,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, { yaws_swagger_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    yapp
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.
