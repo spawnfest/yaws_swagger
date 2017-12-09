@@ -1,0 +1,8 @@
+<erl>
+
+
+%%% @doc for processing the info about trails so it can be used for 
+out(Arg) ->
+	{html,"<div>igor.its alive.its in our api!!!!!</div>"}.
+
+</erl>
