@@ -1,5 +1,7 @@
 %%%-------------------------------------------------------------------
 %% @doc yaws_swagger top level supervisor.
+%%%this also starts up the ets server which is used for storing routes
+%%contains crud  methods for retreiving info about routes
 %% @end
 %%%-------------------------------------------------------------------
 
@@ -28,7 +30,13 @@ start_link() ->
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
-    {ok, { {one_for_all, 0, 1}, []} }.
+    {ok, {{one_for_one, 1, 3600},
+          [{server,
+           {yaws_swagger_ets_server, start_link, []},
+           permanent,
+           500,
+           worker,
+           [yaws_swagger_ets_server]}]}}.
 
 %%====================================================================
 %% Internal functions
