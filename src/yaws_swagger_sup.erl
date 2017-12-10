@@ -13,7 +13,7 @@
 -export([start_link/0]).
 
 %% Supervisor callbacks
--export([init/1]).
+-export([init/1,start_trail/1]).
 
 -define(SERVER, ?MODULE).
 
@@ -24,19 +24,19 @@
 start_link() ->
     supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
+
+start_trail(Trail_list_modules) ->
+    ChildSpec = {yaws_swagger_ets_serv,
+                 {yaws_swagger_ets_server, start_link,[Trail_list_modules]},
+                  permanent, 10500, worker, [yaws_swagger_ets_server]},
+    supervisor:start_child(?SERVER, ChildSpec).
 %%====================================================================
 %% Supervisor callbacks
 %%====================================================================
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
-    {ok, {{one_for_one, 1, 3600},
-          [{server,
-           {yaws_swagger_ets_server, start_link, []},
-           permanent,
-           500,
-           worker,
-           [yaws_swagger_ets_server]}]}}.
+	{ok, {{one_for_one, 6, 3600}, []}}.
 
 %%====================================================================
 %% Internal functions
