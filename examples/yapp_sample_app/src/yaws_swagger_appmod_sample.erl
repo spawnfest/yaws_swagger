@@ -2,7 +2,25 @@
 -module(yaws_swagger_appmod_sample).
 -behaviour(yaws_swagger_trails).
 
--export([trails/0]).
+-include_lib("yaws/include/yaws_api.hrl").
+
+-export([trails/0,out/1]).
+
+
+
+out(A) ->
+    {ehtml,
+     [{p,[],
+       box(io_lib:format("A#arg.appmoddata = ~p~n"
+                         "A#arg.appmod_prepath = ~p~n"
+                         "A#arg.querydata = ~p~n",
+                         [A#arg.appmoddata,
+                          A#arg.appmod_prepath,
+                          A#arg.querydata]))}]}.
+
+
+box(Str) ->
+    {'div',[{class,"box"}],{pre,[],Str}}.
 
 
 trails()->
@@ -26,5 +44,5 @@ trails()->
          ,parameters =>[RequestBody]
          }
      },
-    Path = <<"/users/">>,
+    Path = <<"/appmod/">>,
   {Path," ",[{req_body,RequestBody},{metadata,Metadata}]}.
