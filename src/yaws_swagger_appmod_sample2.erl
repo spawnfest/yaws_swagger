@@ -14,14 +14,14 @@ trails()->
      },
 	 Metadata =
 	    #{get =>
-	      #{tags => ["echo"],
-	        description => "Gets echo var from the server",
-	        produces => ["text/plain"]
+	      #{tags => [<<"echo">>],
+	        description => <<"Gets echo var from the server">>,
+	        produces => [<<"text/plain">>]
 	      },
 	      put =>
-	      #{tags => ["echo"],
-	        description => "Sets echo var in the server",
-	        produces => ["text/plain"],
+	      #{tags => [<<"echo">>],
+	        description => <<"Sets echo var in the server">>,
+	        produces => [<<"text/plain">>],
 	        parameters => [
 	          #{name => <<"echo">>,
 	            description => <<"Echo message">>,
@@ -31,5 +31,5 @@ trails()->
 	        ]
 	      }
 	    },
-    Path = <<"/messages/[:echo]">>,
+    Path = <<"/messages/">>,
   {Path," ",[{req_body,RequestBody},{metadata,Metadata}]}.

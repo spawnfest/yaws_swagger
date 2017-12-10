@@ -14,15 +14,16 @@ trails()->
      },
   Metadata =
     #{ get =>
-       #{ tags => ["newspapers"]
-        , description => "Returns the list of newspapers"
-        , produces => ["application/json"]
+       #{ tags => [<<"newspapers">>]
+        , description => <<"Returns the list of newspapers">>
+        , produces => [<<"application/json">>]
         }
      , post =>
-       # { tags => ["newspapers"]
-         , description => "Creates a new newspaper"
-         , consumes => ["application/json"]
-         , produces => ["application/json"]
+       # { tags => [<<"newspapers">>]
+         , description => <<"Creates a new newspaper">>
+         , consumes => [<<"application/json">>]
+         , produces => [<<"application/json">>]
+         ,parameters =>[RequestBody]
          }
      },
     Path = <<"/users/">>,

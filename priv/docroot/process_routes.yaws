@@ -5,7 +5,7 @@
 out(Arg) ->
 	Server = <<"localhost">>,
 	Basepath =  <<"/testing">>,
-	Default = #{swagger => <<"2.0">>, info => #{title => <<"API-DOCS">>},basePath=>Basepath,server=>Server},
+	Default = #{info => #{title => <<"API-DOCS">>,version=> <<"2.0">>},basePath=>Basepath,host=>Server,swagger => <<"2.0">>},
 	Trails = yaws_swagger_app:get_trails(),
 	Output_send = 
 		lists:foldl(
@@ -14,11 +14,12 @@ out(Arg) ->
 				{{Path_trail,Module_appmod},{Path,Description,Data}} = Module_trail,
 				Req_body = proplists:get_value(req_body,Data),
 				Req_output = proplists:get_value(metadata,Data),
-				Path_trail_out = maps:put(Path,Req_output,Map_path),
+				Path_trail_out = {Path,Req_output},
 				[Path_trail_out|Accum_trails]
 			end,
 			[],Trails) ,
-	 Map_paths = #{paths=>Output_send},
+	 Map_paths = #{paths => Output_send},
 	 Maps_send = maps:merge(Default,Map_paths),
+	 io:format("~n operation defined in spec  is ~p",[Maps_send]),
 	{content,"application/json; charset=iso-8859-1",jsx:encode(Maps_send)}.
 </erl>
