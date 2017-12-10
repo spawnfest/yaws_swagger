@@ -1,0 +1,17 @@
+{application, yapp_sample_app,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, { yapp_sample_app_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    yaws_swagger
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.

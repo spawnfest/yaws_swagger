@@ -20,6 +20,6 @@ out(Arg) ->
 			[],Trails) ,
 	 Map_paths = #{paths => Output_send},
 	 Maps_send = maps:merge(Default,Map_paths),
-	 io:format("~n operation defined in spec  is ~p",[Maps_send]),
+	 %%io:format("~n operation defined in spec  is ~p",[Maps_send]),
 	{content,"application/json; charset=iso-8859-1",jsx:encode(Maps_send)}.
 </erl>
