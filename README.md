@@ -25,7 +25,7 @@ Note
     make
     
     
-	there is an example application in /examples/yapp_sample_app
+	there is an example yaws application (yapp) in /examples/yapp_sample_app/ 
     which you can try out but have to run the above commands first b4 below 
     rebar3 compile
     rebar3 shell
@@ -35,7 +35,7 @@ Note
     you can also follow the instructions below for more detailed explanation
     if including in your own yaws application
 
-    if 
+   
     
 To Use
 ------    
@@ -78,7 +78,7 @@ stop(_State) ->
 
 ```
 
-the ```yaws_swagger_app:add_trails/2``` function adds a list of modules  which you want to feed into the yaws_swagger application.
+the ```yaws_swagger_app:add_trails/1``` function adds a list of modules  which you want to feed into the yaws_swagger application.
 
 the modules must implement the ```-behaviour(yaws_swagger_trails).```
 which means they must return a trails function whic contains metadata which will be fed into the yaws_swagger application

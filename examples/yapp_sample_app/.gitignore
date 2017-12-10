@@ -8,10 +8,12 @@ _*
 *.swo
 .erlang.cookie
 ebin
-log
+log/*.log
 erl_crash.dump
 .rebar
-logs
+logs/*.log
+logs/*.access
+logs/*.auth
 _build
 .idea
 rebar3.crashdump
