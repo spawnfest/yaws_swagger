@@ -52,7 +52,6 @@ init([]) ->
 
 
 handle_call({start_trails, Trail_list_modules}, _From,ServerName) ->
-	io:format("~ntrail list is ~p ",[Trail_list_modules]),
 	F = 
 	fun(Module)->
 		{Appmod,Description,Metadata} = Module:trails(),
