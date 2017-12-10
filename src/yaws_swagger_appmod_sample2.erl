@@ -1,5 +1,5 @@
 %%% 
--module(yaws_swagger_appmod_sample).
+-module(yaws_swagger_appmod_sample2).
 -behaviour(yaws_swagger_trails).
 
 -export([trails/0]).
