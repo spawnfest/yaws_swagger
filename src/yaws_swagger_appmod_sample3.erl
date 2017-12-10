@@ -1,5 +1,5 @@
 %%% 
--module(yaws_swagger_appmod_sample).
+-module(yaws_swagger_appmod_sample3).
 -behaviour(yaws_swagger_trails).
 
 -export([trails/0]).
@@ -23,6 +23,7 @@ trails()->
          , description => "Creates a new newspaper"
          , consumes => ["application/json"]
          , produces => ["application/json"]
+         , parameters => [RequestBody] % and then use that parameter here
          }
      },
     Path = <<"/users/">>,
