@@ -51,12 +51,15 @@ stop(_State) ->
     ok.
 ```
 
-%%====================================================================
-%% implement yaws_swagger_trails
-%%====================================================================
+    
+implement yaws_swagger_trails behaviour
+------   
+
 
 the modules for which you want the api documented  must implement the ```-behaviour(yaws_swagger_trails).```
-which means they must return a trails function whic contains metadata which will be fed into the yaws_swagger application
+which means they must return a trails function which contains metadata which will be fed into the yaws_swagger application
+the trails function must return a map containing the request body and metadata information
+
 ```
 ...
 trails()->
