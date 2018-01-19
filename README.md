@@ -49,18 +49,16 @@ start(_StartType, _StartArgs) ->
 %%--------------------------------------------------------------------
 stop(_State) ->
     ok.
-
-%%====================================================================
-%% Internal functions which must be implemented in the module containing metadata 
-%%====================================================================
-
 ```
 
-the ```yaws_swagger_app:add_trails/1``` function adds a list of modules  which you want to feed into the yaws_swagger application.
+%%====================================================================
+%% implement yaws_swagger_trails
+%%====================================================================
 
-the modules must implement the ```-behaviour(yaws_swagger_trails).```
+the modules for which you want the api documented  must implement the ```-behaviour(yaws_swagger_trails).```
 which means they must return a trails function whic contains metadata which will be fed into the yaws_swagger application
 ```
+...
 trails()->
 	RequestBody =
     #{ name => <<"request body">>
@@ -92,7 +90,7 @@ trails()->
 %%====================================================================
 
   
-  in your yaws.conf file add a yapp called yaws_swagger which is a yapp itself
+  in your yaws.conf file add a yapp called yaws_swagger
   ```
   ###yap servers
 ###yap admin server
@@ -108,9 +106,8 @@ trails()->
         </opaque>
 </server>
 ```
-browser to   ```localhost:8008\yaws_swagger``` to view swagger docs
+browser to   ```ip-address|hostname:8008\yaws_swagger``` to view user interface  of api endpoints !!
 to manipulate trails information find functions below 
-there are various function for manipulation the trails list 
 
 * ```yaws_swagger_app:add_trails/1```
 * ```yaws_swagger_app:add_trail/1```
