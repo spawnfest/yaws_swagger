@@ -11,30 +11,6 @@ With this application you can document your yaws api endpoints for easy use by f
 it uses  [swagger ui](https://swagger.io/swagger-ui/) to generate a user interface based on your api endpoints which you feed into the applicaton .
 
 
-
-Note
-------
-	please note that yaws does not compile everything using rebar3 compile .
-    
-    you may have to do the following to get it to compile fully before running 
-	rebar3 shell 
-    
-    cd _build/default/lib/yaws/
-    autoreconf -fi
-    ./configure --disable-pam
-    make
-    
-    
-	there is an example yaws application (yapp) in /examples/yapp_sample_app/ 
-    which you can try out but have to run the above commands first b4 below 
-    rebar3 compile
-    rebar3 shell
-    browse to http://ip-address:8008/yaws_swagger
-    to view the generated userinterface for the sample application
-    
-    you can also follow the instructions below for more detailed explanation
-    if including in your own yaws application
-
    
     
 To Use
@@ -43,10 +19,11 @@ To Use
 	in your rebar.config add the application as a dependancy .
   
    ```
-   {yaws_swagger,{git,"https://github.com/spawnfest/cnc.git",{branch,"master"}}}`
+   {yaws_swagger,{git,"https://github.com/spawnfest/yaws_swagger.git",{branch,"master"}}}`
    ```
-then in your application start module  add a list of modules
-for which you want to feed into the yaws_swagger application
+then in your application start module  add a list of modules which have the behaviour yaws_swagger_trails implemented 
+using the yaws_swagger_app:add_trails/1 or yaws_swagger_app:add_trail/1 functions .
+find a sample application module below below 
 ```
 %%%-------------------------------------------------------------------
 %% @doc yapp_sample_app public API
@@ -66,6 +43,7 @@ for which you want to feed into the yaws_swagger application
 
 start(_StartType, _StartArgs) ->
 	yaws_swagger_app:add_trails([yaws_swagger_appmod_sample,yaws_swagger_appmod_sample2]),
+	%%list of modules implementing the behaviour yaws_swagger_trails [yaws_swagger_appmod_sample,yaws_swagger_appmod_sample2]
     yapp_sample_app_sup:start_link().
 
 %%--------------------------------------------------------------------
@@ -73,7 +51,7 @@ stop(_State) ->
     ok.
 
 %%====================================================================
-%% Internal functions
+%% Internal functions which must be implemented in the module containing metadata 
 %%====================================================================
 
 ```
@@ -107,24 +85,31 @@ trails()->
     Path = <<"/appmod/">>,
   {Path," ",[{req_body,RequestBody},{metadata,Metadata}]}.
   ```
+
+
+%%====================================================================
+%% Configuration in yaws.conf file
+%%====================================================================
+
   
   in your yaws.conf file add a yapp called yaws_swagger which is a yapp itself
   ```
   ###yap servers
 ###yap admin server
-<server yapp_sample_app>
+<server yapp_server>
         port = 8008
         listen = 0.0.0.0
 		docroot = priv/docroot_gconf
         dir_listings = false
         arg_rewrite_mod = yapp
-        appmods = <appmod, yaws_swagger_appmod_sample>
         <opaque>
            yapp_server_id = internal
-	   bootstrap_yapps = yapp_sample_app,yaws_swagger
+	   bootstrap_yapps = yaws_swagger
         </opaque>
 </server>
 ```
+browser to   ```localhost:8008\yaws_swagger``` to view swagger docs
+to manipulate trails information find functions below 
 there are various function for manipulation the trails list 
 
 * ```yaws_swagger_app:add_trails/1```
