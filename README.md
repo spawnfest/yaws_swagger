@@ -88,10 +88,8 @@ trails()->
   ```
 
 
-%%====================================================================
-%% Configuration in yaws.conf file
-%%====================================================================
-
+Configuration in yaws.conf file
+------   
   
   in your yaws.conf file add a yapp called yaws_swagger
   ```
